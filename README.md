@@ -44,6 +44,8 @@
 
 ## About
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/tiaanduplessis/react-native-modest-checkbox.svg)](https://greenkeeper.io/)
+
 A customizable checkbox component for React Native that supports setting a custom image or component as the checkbox. Inspired by [react-native-checkbox](https://github.com/sconxu/react-native-checkbox).
 
 ## Install
