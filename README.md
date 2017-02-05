@@ -25,6 +25,9 @@
     <a href="https://badge.fury.io/gh/tiaanduplessis%2Freact-native-modest-checkbox">
       <img src="https://badge.fury.io/gh/tiaanduplessis%2Freact-native-modest-checkbox.svg?style=flat-square" alt="GitHub version" />
    </a>
+   <a href="https://greenkeeper.io/">
+      <img src="https://badges.greenkeeper.io/tiaanduplessis/react-native-modest-checkbox.svg" alt="Greenkeeper" />
+   </a>
 </div>
 <br>
 <div align="center">
@@ -43,8 +46,6 @@
 </details>
 
 ## About
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/tiaanduplessis/react-native-modest-checkbox.svg)](https://greenkeeper.io/)
 
 A customizable checkbox component for React Native that supports setting a custom image or component as the checkbox. Inspired by [react-native-checkbox](https://github.com/sconxu/react-native-checkbox).
 
@@ -89,13 +90,13 @@ AppRegistry.registerComponent('App', () => App);
 
 ```
 
-You can use a your own images for the checkbox:
+You can use your own images for the checkbox states:
 
 ```js
 <CheckBox checkedImage={require('./path/to/image.png')} uncheckedImage={require('./path/to/otherImage.png')} />
 ```
 
-It can also be used with your own components as the for the checkbox:
+It can also be used with your own components for the checkbox states:
 
 ```js
 // Using react-native-vector-icons
@@ -141,7 +142,7 @@ It can also be used with your own components as the for the checkbox:
   <tr>
     <td><code>checkboxStyle</code></td>
     <td>Styles applied to the checkbox</td> 
-    <td><code>{ width: 30, height: 30 }<code></td>
+    <td><code>{ width: 30, height: 30 }</code></td>
   </tr>
   <tr>
     <td><code>label</code></td>
