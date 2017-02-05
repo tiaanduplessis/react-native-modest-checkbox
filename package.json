@@ -1,0 +1,32 @@
+{
+  "name": "react-native-modest-checkbox",
+  "version": "1.0.0",
+  "description": "A modest checkbox component for React Native",
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tiaanduplessis/react-native-modest-checkbox.git"
+  },
+  "homepage": "https://github.com/tiaanduplessis/react-native-modest-checkbox",
+  "bugs": "https://github.com/tiaanduplessis/react-native-modest-checkbox/issues",
+  "author": {
+    "name": "Tiaan",
+    "email": "tiaanduplessis@hotmail.com",
+    "url": "tiaanduplessis.co.za"
+  },
+  "scripts": {
+    "lint": "standard",
+    "lint:fix": "standard --fix --verbose",
+    "test": "npm run lint"
+  },
+  "keywords": [
+    "react-native,",
+    "checkbox,",
+    "component",
+    "react-native-modest-checkbox"
+  ],
+  "devDependencies": {
+    "standard": "^8.6.0"
+  }
+}
