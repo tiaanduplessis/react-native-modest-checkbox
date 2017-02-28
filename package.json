@@ -27,7 +27,7 @@
     "react-native-modest-checkbox"
   ],
   "devDependencies": {
-    "standard": "^8.6.0"
+    "standard": "^9.0.0"
   },
   "standard": {
   "ignore": [
