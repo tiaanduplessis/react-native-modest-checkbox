@@ -25,9 +25,6 @@
     <a href="https://badge.fury.io/gh/tiaanduplessis%2Freact-native-modest-checkbox">
       <img src="https://badge.fury.io/gh/tiaanduplessis%2Freact-native-modest-checkbox.svg?style=flat-square" alt="GitHub version" />
    </a>
-   <a href="https://greenkeeper.io/">
-      <img src="https://badges.greenkeeper.io/tiaanduplessis/react-native-modest-checkbox.svg" alt="Greenkeeper" />
-   </a>
 </div>
 <br>
 <div align="center">
