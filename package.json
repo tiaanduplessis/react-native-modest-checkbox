@@ -16,22 +16,26 @@
     "url": "tiaanduplessis.co.za"
   },
   "scripts": {
-    "lint": "standard",
-    "lint:fix": "standard --fix --verbose",
+    "lint": "standard --parser babel-eslint",
+    "lint:fix": "standard --fix --verbose --parser babel-eslint",
     "test": "npm run lint"
   },
   "keywords": [
-    "react-native,",
+    "react-native",
     "checkbox,",
     "component",
     "react-native-modest-checkbox"
   ],
   "devDependencies": {
-    "standard": "^8.6.0"
+    "babel-eslint": "^7.2.3",
+    "standard": "^10.0.2"
   },
   "standard": {
-  "ignore": [
-    "/example"
-  ]
-}
+    "ignore": [
+      "/example"
+    ]
+  },
+  "dependencies": {
+    "prop-types": "^15.5.8"
+  }
 }
