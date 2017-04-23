@@ -1,17 +1,10 @@
-'use strict'
-
-import React, {Component, PropTypes} from 'react'
-import {TouchableOpacity, View, Text, StyleSheet, Image} from 'react-native'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { TouchableOpacity, View, Text, StyleSheet, Image } from 'react-native'
 
 class CheckBox extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      checked: false
-    }
-
-    this._toggleChecked = this._toggleChecked.bind(this)
+  state = {
+    checked: false
   }
 
   componentDidMount () {
@@ -20,7 +13,7 @@ class CheckBox extends Component {
 
   render () {
     return (
-      <TouchableOpacity onPress={this._toggleChecked} underlayColor={this.props.underlayColor} style={styles.flexContainer}>
+      <TouchableOpacity onPress={this._handleToggleChecked} underlayColor={this.props.underlayColor} style={styles.flexContainer}>
         <View style={this.props.containerStyle || styles.container}>
           {this.props.labelBefore ? <Label labelStyle={this.props.labelStyle} numberOfLabelLines={this.props.numberOfLabelLines} label={this.props.label} /> : null }
 
@@ -36,7 +29,7 @@ class CheckBox extends Component {
     )
   }
 
-  _toggleChecked () {
+  _handleToggleChecked = () => {
     const checked = !this.state.checked
     const name = this.props.label
 
