@@ -100,7 +100,6 @@ It can also be used with your own components for the checkbox states:
 // Using react-native-vector-icons
 
 <CheckBox
-  custom
   checkedComponent={<Icon name="hand-peace-o" size={25} color="#222" />}
   uncheckedComponent={<Icon name="hand-paper-o" size={25} color="#222" />} 
   label='Custom Component'
@@ -116,11 +115,6 @@ It can also be used with your own components for the checkbox states:
     <th>Property</th>
     <th>Description</th> 
     <th>Default Value</th>
-  </tr>
-  <tr>
-    <td><code>custom</code></td>
-    <td>Flag to indicate if you want to use your own custom component for the checkbox</td> 
-    <td><code>false</code></td>
   </tr>
   <tr>
     <td><code>checkedComponent</code></td>

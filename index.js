@@ -1,94 +1,125 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { TouchableOpacity, View, Text, StyleSheet, Image } from 'react-native'
 
-class CheckBox extends Component {
-  state = {
-    checked: false
-  }
+class Checkbox extends PureComponent {
+    state = {
+        checked: false
+    }
 
-  componentDidMount () {
-    this.setState({ checked: this.props.checked })
-  }
+    componentDidMount() {
+        this.setState({ checked: this.props.checked })
+    }
 
-  render () {
-    return (
-      <TouchableOpacity onPress={this._handleToggleChecked} underlayColor={this.props.underlayColor} style={styles.flexContainer}>
-        <View style={this.props.containerStyle || styles.container}>
-          {this.props.labelBefore ? <Label labelStyle={this.props.labelStyle} numberOfLabelLines={this.props.numberOfLabelLines} label={this.props.label} /> : null }
+    render() {
+        const { checked } = this.state
+        const {
+            labelBefore,
+            containerStyle,
+            checkedComponent,
+            uncheckedComponent,
+            checkedImage,
+            uncheckedImage,
+            checkboxStyle,
+            labelStyle,
+            numberOfLabelLines,
+            label
+        } = this.props
 
-          {this.props.custom
-            ? this.state.checked
-              ? this.props.checkedComponent : this.props.uncheckedComponent
-            : <Image style={this.props.checkBoxStyle || styles.checkbox} source={this.state.checked ? this.props.checkedImage : this.props.uncheckedImage} />
-        }
+        return (
+            <TouchableOpacity
+                style={[styles.container, containerStyle]}
+                onPress={this.handleToggleChecked}
+            >
+                {labelBefore ? (
+                    <Label
+                        labelStyle={labelStyle}
+                        numberOfLabelLines={numberOfLabelLines}
+                        label={label}
+                    />
+                ) : null}
 
-          {this.props.labelBefore ? null : <Label labelStyle={this.props.labelStyle} numberOfLabelLines={this.props.numberOfLabelLines} label={this.props.label} /> }
-        </View>
-      </TouchableOpacity>
-    )
-  }
+                {checkedComponent && uncheckedComponent ? checked ? (
+                    checkedComponent
+                ) : (
+                    uncheckedComponent
+                ) : (
+                    <Image
+                        style={[styles.checkbox, checkboxStyle]}
+                        source={checked ? checkedImage : uncheckedImage}
+                    />
+                )}
 
-  _handleToggleChecked = () => {
-    const checked = !this.state.checked
-    const name = this.props.label
+                {!labelBefore && (
+                    <Label
+                        labelStyle={labelStyle}
+                        numberOfLabelLines={numberOfLabelLines}
+                        label={label}
+                    />
+                )}
+            </TouchableOpacity>
+        )
+    }
 
-    this.setState({checked})
-    this.props.onChange && this.props.onChange({name, checked})
-  }
+    handleToggleChecked = () => {
+        const { label } = this.props
+        const checked = !this.state.checked
+
+        this.setState({ checked })
+        this.props.onChange && this.props.onChange({ label, checked })
+    }
 }
 
-const Label = (props) => (
-  <View style={styles.labelContainer}>
-    <Text style={[styles.label, props.labelStyle]} numberOfLines={props.numberOfLabelLines}>
-      {props.label}
-    </Text>
-  </View>
+const Label = ({ labelStyle, numberOfLabelLines, label }) => (
+    <View style={styles.labelContainer}>
+        <Text style={[styles.label, labelStyle]} numberOfLines={numberOfLabelLines}>
+            {label}
+        </Text>
+    </View>
 )
 
 var styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  checkbox: {
-    width: 30,
-    height: 30
-  },
-  labelContainer: {
-    marginLeft: 10,
-    marginRight: 10
-  },
-  label: {
-    fontSize: 16,
-    color: '#222'
-  }
+    container: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    checkbox: {
+        width: 30,
+        height: 30
+    },
+    labelContainer: {
+        marginLeft: 10,
+        marginRight: 10
+    },
+    label: {
+        fontSize: 16,
+        color: '#222'
+    }
 })
 
-CheckBox.defaultProps = {
-  custom: false,
-  label: 'Label',
-  numberOfLabelLines: 1,
-  labelBefore: false,
-  checked: false,
-  checkedImage: require('./checked.png'),
-  uncheckedImage: require('./unchecked.png'),
-  checkedComponent: (<Text>Checked</Text>),
-  uncheckedComponent: (<Text>Unchecked</Text>)
+Checkbox.defaultProps = {
+    custom: false,
+    label: 'Label',
+    numberOfLabelLines: 1,
+    labelBefore: false,
+    checked: false,
+    checkedImage: require('./checked.png'),
+    uncheckedImage: require('./unchecked.png'),
+    checkedComponent: null,
+    uncheckedComponent: null
 }
 
-CheckBox.propTypes = {
-  custom: PropTypes.bool,
-  checkedComponent: PropTypes.element,
-  uncheckedComponent: PropTypes.element,
-  checked: PropTypes.bool,
-  checkBoxStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-  containerStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-  label: PropTypes.string,
-  labelBefore: PropTypes.bool,
-  labelStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-  numberOfLabelLines: PropTypes.number,
-  onChange: PropTypes.func
+Checkbox.propTypes = {
+    checkedComponent: PropTypes.element,
+    uncheckedComponent: PropTypes.element,
+    checked: PropTypes.bool,
+    checkboxStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+    containerStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+    label: PropTypes.string,
+    labelBefore: PropTypes.bool,
+    labelStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+    numberOfLabelLines: PropTypes.number,
+    onChange: PropTypes.func
 }
 
-export default CheckBox
+export default Checkbox
