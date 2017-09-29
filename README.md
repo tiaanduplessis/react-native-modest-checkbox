@@ -38,7 +38,6 @@
   <li><a href="#install">Install</a></li>
   <li><a href="#usage">Usage</a></li>
   <li><a href="#props">Props</a></li>
-  <li><a href="#example">Example</a></li>
   <li><a href="#contribute">Contribute</a></li>
   <li><a href="#license">License</a></li>
 </details>
@@ -177,10 +176,6 @@ It can also be used with your own components for the checkbox states:
     <td><code>none</code></td>
   </tr>
 </table>
-
-## Example
-
-Check out the demo [here](./example)!
 
 ## Contribute
 
