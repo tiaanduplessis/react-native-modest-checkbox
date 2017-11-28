@@ -5,9 +5,13 @@ import { TouchableOpacity, View, Text, StyleSheet, Image } from 'react-native'
 class Checkbox extends PureComponent {
     state = {
         checked: false
-    }
+    };
 
     componentDidMount() {
+        this.setState({ checked: this.props.checked })
+    }
+
+    componentDidUpdate(prevProps, prevState) {
         this.setState({ checked: this.props.checked })
     }
 
