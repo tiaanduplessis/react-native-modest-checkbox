@@ -26,10 +26,6 @@
       <img src="https://badge.fury.io/gh/tiaanduplessis%2Freact-native-modest-checkbox.svg?style=flat-square" alt="GitHub version" />
    </a>
 </div>
-<br>
-<div align="center">
-  Built with ❤︎ by <a href="tiaanduplessis.co.za">Tiaan</a> and <a href="https://github.com/tiaanduplessis/react-native-modest-checkbox/graphs/contributors">contributors</a>
-</div>
 
 <h2>Table of Contents</h2>
 <details>

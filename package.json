@@ -10,20 +10,21 @@
     },
     "homepage": "https://github.com/tiaanduplessis/react-native-modest-checkbox",
     "bugs": "https://github.com/tiaanduplessis/react-native-modest-checkbox/issues",
-    "author": {
-        "name": "Tiaan",
-        "email": "tiaanduplessis@hotmail.com",
-        "url": "tiaan.beer"
-    },
+    "author": "Tiaan du Plessis",
     "scripts": {
-        "format": "prettier-standard **/*.js",
-        "test": "npm run format"
+        "lint": "standard --fix ./**/*.js",
+        "test": "npm run lint"
     },
-    "keywords": ["react-native", "checkbox,", "component", "react-native-modest-checkbox"],
-    "devDependencies": {
-        "prettier-standard": "^7.0.1"
-    },
+    "keywords": [
+        "react-native",
+        "checkbox,",
+        "component",
+        "react-native-modest-checkbox"
+    ],
     "dependencies": {
-        "prop-types": "^15.6.0"
+        "prop-types": "^15.6.1"
+    },
+    "devDependencies": {
+        "standard": "^11.0.1"
     }
 }
