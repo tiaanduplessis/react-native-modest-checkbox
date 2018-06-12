@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { TouchableOpacity, View, Text, StyleSheet, Image, Platform, TouchableNativeFeedback } from 'react-native'
+import { TouchableOpacity, View, Text, StyleSheet, Image, Platform, TouchableNativeFeedback, ViewPropTypes, ImageStylePropTypes } from 'react-native'
 
 class Checkbox extends PureComponent {
   state = {
@@ -25,8 +25,8 @@ class Checkbox extends PureComponent {
     checkedComponent: PropTypes.element,
     uncheckedComponent: PropTypes.element,
     checked: PropTypes.bool,
-    checkboxStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object, Image.propTypes.style]),
-    containerStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object, View.propTypes.style]),
+    checkboxStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object, ImageStylePropTypes]),
+    containerStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object, ViewPropTypes.style]),
     label: PropTypes.string,
     labelBefore: PropTypes.bool,
     labelStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
