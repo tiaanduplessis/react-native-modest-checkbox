@@ -1,6 +1,6 @@
 {
     "name": "react-native-modest-checkbox",
-    "version": "3.0.1",
+    "version": "3.0.2",
     "description": "A modest checkbox component for React Native",
     "license": "MIT",
     "main": "index.js",
