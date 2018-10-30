@@ -60,14 +60,14 @@ $ yarn add react-native-modest-checkbox
 
 ```js
 // ... Imagine imports here
-import CheckBox from 'react-native-modest-checkbox'
+import Checkbox from 'react-native-modest-checkbox'
 
 export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <CheckBox
-          label='Text for checkBox'
+        <Checkbox
+          label='Text for checkbox'
           onChange={(checked) => console.log('Checked!')}
         />
       </View>
@@ -170,6 +170,11 @@ It can also be used with your own components for the checkbox states:
     <td><code>onChange</code></td>
     <td>Callback that will be invoked when the checked state has changed. receives a object with <code>name</code> & <code>checked</code> properties as arguments</td> 
     <td><code>none</code></td>
+  </tr>
+    <tr>
+    <td><code>noFeedback</code></td>
+    <td>Use <code>TouchableWithoutFeedback</code> as container of checkbox</td> 
+    <td><code>false</code></td>
   </tr>
 </table>
 
