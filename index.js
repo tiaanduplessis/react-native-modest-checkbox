@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { TouchableOpacity, View, Text, StyleSheet, Image, Platform, TouchableNativeFeedback, ViewPropTypes, ImageStylePropTypes } from 'react-native'
+import { TouchableOpacity, View, Text, StyleSheet, Image, Platform, TouchableNativeFeedback, ViewPropTypes, TouchableWithoutFeedback } from 'react-native'
 
 class Checkbox extends PureComponent {
   state = {
@@ -18,20 +18,22 @@ class Checkbox extends PureComponent {
     checkedImage: require('./checked.png'),
     uncheckedImage: require('./unchecked.png'),
     checkedComponent: null,
-    uncheckedComponent: null
+    uncheckedComponent: null,
+    noFeedback: false
   }
 
   static propTypes = {
     checkedComponent: PropTypes.element,
     uncheckedComponent: PropTypes.element,
     checked: PropTypes.bool,
-    checkboxStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object, ImageStylePropTypes]),
+    checkboxStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
     containerStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object, ViewPropTypes.style]),
     label: PropTypes.string,
     labelBefore: PropTypes.bool,
     labelStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
     numberOfLabelLines: PropTypes.number,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    noFeedback: PropTypes.bool
   }
 
   componentDidUpdate (prevProps, prevState) {
@@ -50,11 +52,14 @@ class Checkbox extends PureComponent {
       checkboxStyle,
       labelStyle,
       numberOfLabelLines,
-      label
+      label,
+      noFeedback
     } = this.props
 
+    const Container = noFeedback ? TouchableWithoutFeedback : Checkbox.Container
+
     return (
-      <Checkbox.Container
+      <Container
         style={[styles.container, containerStyle]}
         onPress={this.handleToggleChecked}
       >
@@ -90,7 +95,7 @@ class Checkbox extends PureComponent {
 
         </View>
 
-      </Checkbox.Container>
+      </Container>
     )
   }
 
