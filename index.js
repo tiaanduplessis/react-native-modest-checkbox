@@ -27,7 +27,7 @@ class Checkbox extends PureComponent {
     uncheckedComponent: PropTypes.element,
     checked: PropTypes.bool,
     checkboxStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-    containerStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object, ViewPropTypes.style]),
+    containerStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
     label: PropTypes.string,
     labelBefore: PropTypes.bool,
     labelStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
