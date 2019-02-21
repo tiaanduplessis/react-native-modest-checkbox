@@ -12,6 +12,7 @@ class Checkbox extends PureComponent {
   static defaultProps = {
     custom: false,
     label: 'Label',
+    customLabel: null,
     numberOfLabelLines: 1,
     labelBefore: false,
     checked: false,
@@ -29,6 +30,7 @@ class Checkbox extends PureComponent {
     checkboxStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
     containerStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
     label: PropTypes.string,
+    customLabel: PropTypes.element,
     labelBefore: PropTypes.bool,
     labelStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
     numberOfLabelLines: PropTypes.number,
@@ -53,7 +55,8 @@ class Checkbox extends PureComponent {
       labelStyle,
       numberOfLabelLines,
       label,
-      noFeedback
+      noFeedback,
+      customLabel
     } = this.props
 
     const Container = noFeedback ? TouchableWithoutFeedback : Checkbox.Container
@@ -69,6 +72,7 @@ class Checkbox extends PureComponent {
               labelStyle={labelStyle}
               numberOfLabelLines={numberOfLabelLines}
               label={label}
+              customLabel={customLabel}
             />
           ) : null}
 
@@ -90,6 +94,7 @@ class Checkbox extends PureComponent {
               labelStyle={labelStyle}
               numberOfLabelLines={numberOfLabelLines}
               label={label}
+              customLabel={customLabel}
             />
           )}
 
@@ -108,13 +113,15 @@ class Checkbox extends PureComponent {
   }
 }
 
-const Label = ({ labelStyle, numberOfLabelLines, label }) => (
-  <View style={styles.labelContainer}>
-    <Text style={[styles.label, labelStyle]} numberOfLines={numberOfLabelLines}>
-      {label}
-    </Text>
-  </View>
-)
+const Label = ({ labelStyle, numberOfLabelLines, label, customLabel }) => {
+  return !customLabel ? (
+      <View style={styles.labelContainer}>
+        <Text style={[styles.label, labelStyle]} numberOfLines={numberOfLabelLines}>
+          {label}
+        </Text>
+      </View>
+    ) : customLabel
+}
 
 var styles = StyleSheet.create({
   container: {
