@@ -96,7 +96,7 @@ It can also be used with your own components for the checkbox states:
 
 <CheckBox
   checkedComponent={<Icon name="hand-peace-o" size={25} color="#222" />}
-  uncheckedComponent={<Icon name="hand-paper-o" size={25} color="#222" />} 
+  uncheckedComponent={<Icon name="hand-paper-o" size={25} color="#222" />}
   label='Custom Component'
   onChange={(checked) => console.log('Checked!')}
 />
@@ -108,72 +108,77 @@ It can also be used with your own components for the checkbox states:
 <table style="width:80%">
   <tr>
     <th>Property</th>
-    <th>Description</th> 
+    <th>Description</th>
     <th>Default Value</th>
   </tr>
   <tr>
     <td><code>checkedComponent</code></td>
-    <td>Custom component representing the checked state</td> 
+    <td>Custom component representing the checked state</td>
     <td><code>&lt;Text&gt;Checked&lt;/Text&gt;</code></td>
   </tr>
   <tr>
     <td><code>uncheckedComponent</code></td>
-    <td>Custom component representing the unchecked state</td> 
+    <td>Custom component representing the unchecked state</td>
     <td><code>&lt;Text&gt;Unchecked&lt;/Text&gt;</code></td>
   </tr>
   <tr>
     <td><code>checked</code></td>
-    <td>Checked value of checkbox</td> 
+    <td>Checked value of checkbox</td>
     <td><code>false</code></td>
   </tr>
   <tr>
     <td><code>checkboxStyle</code></td>
-    <td>Styles applied to the checkbox</td> 
+    <td>Styles applied to the checkbox</td>
     <td><code>{ width: 30, height: 30 }</code></td>
   </tr>
   <tr>
     <td><code>label</code></td>
-    <td>Text that will be displayed next to the checkbox</td> 
+    <td>Text that will be displayed next to the checkbox</td>
     <td><code>'Label'</code></td>
   </tr>
   <tr>
+    <td><code>customLabel</code></td>
+    <td>Customize label using React Component</td>
+    <td><code>null</code></td>
+  </tr>
+  <tr>
     <td><code>labelBefore</code></td>
-    <td>Flag if label should be before the checkbox</td> 
+    <td>Flag if label should be before the checkbox</td>
     <td><code>false</code></td>
   </tr>
   <tr>
     <td><code>labelStyle</code></td>
-    <td>Styles applied to the label</td> 
+    <td>Styles applied to the label</td>
     <td><code>{fontSize: 16, color: '#222'}</code></td>
   </tr>
   <tr>
     <td><code>numberOfLabelLines</code></td>
-    <td>The number of lines over which the label will be displayed</td> 
+    <td>The number of lines over which the label will be displayed</td>
     <td><code>1</code></td>
   </tr>
   <tr>
     <td><code>containerStyle</code></td>
-    <td>Styles applied to the container of label & checkbox</td> 
+    <td>Styles applied to the container of label & checkbox</td>
     <td><code>{ flexDirection: 'row', alignItems: 'center'}</code></td>
   </tr>
   <tr>
     <td><code>checkedImage</code></td>
-    <td>Image representing checked state (e.g. <code>require('./path/to/image.png')</code>)</td> 
+    <td>Image representing checked state (e.g. <code>require('./path/to/image.png')</code>)</td>
     <td><code>checked.png</code></td>
   </tr>
   <tr>
     <td><code>uncheckedImage</code></td>
-    <td>Image representing unchecked state (e.g. <code>require('./path/to/image.png')</code>)</td> 
+    <td>Image representing unchecked state (e.g. <code>require('./path/to/image.png')</code>)</td>
     <td><code>unchecked.png</code></td>
   </tr>
   <tr>
     <td><code>onChange</code></td>
-    <td>Callback that will be invoked when the checked state has changed. receives a object with <code>name</code> & <code>checked</code> properties as arguments</td> 
+    <td>Callback that will be invoked when the checked state has changed. receives a object with <code>name</code> & <code>checked</code> properties as arguments</td>
     <td><code>none</code></td>
   </tr>
     <tr>
     <td><code>noFeedback</code></td>
-    <td>Use <code>TouchableWithoutFeedback</code> as container of checkbox</td> 
+    <td>Use <code>TouchableWithoutFeedback</code> as container of checkbox</td>
     <td><code>false</code></td>
   </tr>
 </table>
