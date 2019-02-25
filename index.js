@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { TouchableOpacity, View, Text, StyleSheet, Image, Platform, TouchableNativeFeedback, ViewPropTypes, TouchableWithoutFeedback } from 'react-native'
+import { TouchableOpacity, View, Text, StyleSheet, Image, Platform, TouchableNativeFeedback, TouchableWithoutFeedback } from 'react-native'
 
 class Checkbox extends PureComponent {
   state = {
@@ -115,12 +115,12 @@ class Checkbox extends PureComponent {
 
 const Label = ({ labelStyle, numberOfLabelLines, label, customLabel }) => {
   return !customLabel ? (
-      <View style={styles.labelContainer}>
-        <Text style={[styles.label, labelStyle]} numberOfLines={numberOfLabelLines}>
-          {label}
-        </Text>
-      </View>
-    ) : customLabel
+    <View style={styles.labelContainer}>
+      <Text style={[styles.label, labelStyle]} numberOfLines={numberOfLabelLines}>
+        {label}
+      </Text>
+    </View>
+  ) : customLabel
 }
 
 var styles = StyleSheet.create({
