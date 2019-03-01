@@ -20,7 +20,8 @@ class Checkbox extends PureComponent {
     uncheckedImage: require('./unchecked.png'),
     checkedComponent: null,
     uncheckedComponent: null,
-    noFeedback: false
+    noFeedback: false,
+    disabled:false,
   }
 
   static propTypes = {
@@ -35,7 +36,8 @@ class Checkbox extends PureComponent {
     labelStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
     numberOfLabelLines: PropTypes.number,
     onChange: PropTypes.func,
-    noFeedback: PropTypes.bool
+    noFeedback: PropTypes.bool,
+    disabled:PropTypes.bool
   }
 
   componentDidUpdate (prevProps, prevState) {
@@ -56,7 +58,8 @@ class Checkbox extends PureComponent {
       numberOfLabelLines,
       label,
       noFeedback,
-      customLabel
+      customLabel,
+      disabled
     } = this.props
 
     const Container = noFeedback ? TouchableWithoutFeedback : Checkbox.Container
@@ -65,6 +68,7 @@ class Checkbox extends PureComponent {
       <Container
         style={[styles.container, containerStyle]}
         onPress={this.handleToggleChecked}
+        disabled={disabled}
       >
         <View style={[styles.container, containerStyle]}>
           {labelBefore ? (
