@@ -21,7 +21,7 @@ class Checkbox extends PureComponent {
     checkedComponent: null,
     uncheckedComponent: null,
     noFeedback: false,
-    disabled:false,
+    disabled: false
   }
 
   static propTypes = {
@@ -37,7 +37,7 @@ class Checkbox extends PureComponent {
     numberOfLabelLines: PropTypes.number,
     onChange: PropTypes.func,
     noFeedback: PropTypes.bool,
-    disabled:PropTypes.bool
+    disabled: PropTypes.bool
   }
 
   componentDidUpdate (prevProps, prevState) {
