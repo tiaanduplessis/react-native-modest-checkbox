@@ -68,7 +68,7 @@ export default class App extends Component {
       <View style={styles.container}>
         <Checkbox
           label='Text for checkbox'
-          onChange={(checked) => console.log('Checked!')}
+          onChange={({ label, checked }) => console.log(label, checked)}
         />
       </View>
     );
@@ -86,7 +86,7 @@ AppRegistry.registerComponent('App', () => App);
 You can use your own images for the checkbox states:
 
 ```js
-<CheckBox checkedImage={require('./path/to/image.png')} uncheckedImage={require('./path/to/otherImage.png')} />
+<Checkbox checkedImage={require('./path/to/image.png')} uncheckedImage={require('./path/to/otherImage.png')} />
 ```
 
 It can also be used with your own components for the checkbox states:
@@ -94,14 +94,43 @@ It can also be used with your own components for the checkbox states:
 ```js
 // Using react-native-vector-icons
 
-<CheckBox
+<Checkbox
   checkedComponent={<Icon name="hand-peace-o" size={25} color="#222" />}
   uncheckedComponent={<Icon name="hand-paper-o" size={25} color="#222" />}
   label='Custom Component'
-  onChange={(checked) => console.log('Checked!')}
+  onChange={({ label, checked }) => console.log(label, checked)}
 />
 
 ```
+
+## TypeScript
+
+Declarations are included and discovered automatically. Install the React and React Native types appropriate for your app (modern React Native includes its own types).
+
+```tsx
+import * as React from 'react'
+import { StyleSheet } from 'react-native'
+import Checkbox, { CheckboxChangeEvent } from 'react-native-modest-checkbox'
+
+const styles = StyleSheet.create({ checkbox: { width: 24, height: 24 } })
+
+export function Choice() {
+  const [checked, setChecked] = React.useState(false)
+  const onChange = (event: CheckboxChangeEvent) => setChecked(event.checked)
+
+  return (
+    <Checkbox
+      label="Choice"
+      checked={checked}
+      onChange={onChange}
+      checkboxStyle={[styles.checkbox, null]}
+      checkedImage={{ uri: 'https://example.com/checked.png' }}
+    />
+  )
+}
+```
+
+Style props use React Native's `StyleProp` types. Images accept React Native image sources, including registered assets returned by `require('./image.png')` and URI objects. The existing `CheckboxProps`, `CheckboxCheckboxStyle`, `CheckboxContainerStyle`, and `CheckboxLabelStyle` exports remain available.
 
 ## Props
 
@@ -114,12 +143,12 @@ It can also be used with your own components for the checkbox states:
   <tr>
     <td><code>checkedComponent</code></td>
     <td>Custom component representing the checked state</td>
-    <td><code>&lt;Text&gt;Checked&lt;/Text&gt;</code></td>
+    <td><code>null</code></td>
   </tr>
   <tr>
     <td><code>uncheckedComponent</code></td>
     <td>Custom component representing the unchecked state</td>
-    <td><code>&lt;Text&gt;Unchecked&lt;/Text&gt;</code></td>
+    <td><code>null</code></td>
   </tr>
   <tr>
     <td><code>checked</code></td>
@@ -173,7 +202,7 @@ It can also be used with your own components for the checkbox states:
   </tr>
   <tr>
     <td><code>onChange</code></td>
-    <td>Callback that will be invoked when the checked state has changed. receives a object with <code>name</code> & <code>checked</code> properties as arguments</td>
+    <td>Callback invoked with one object containing <code>label</code> (string) and <code>checked</code> (boolean)</td>
     <td><code>none</code></td>
   </tr>
     <tr>
@@ -181,11 +210,20 @@ It can also be used with your own components for the checkbox states:
     <td>Use <code>TouchableWithoutFeedback</code> as container of checkbox</td>
     <td><code>false</code></td>
   </tr>
+  <tr>
+    <td><code>disabled</code></td>
+    <td>Disable touch interaction</td>
+    <td><code>false</code></td>
+  </tr>
 </table>
 
 ## Contribute
 
 Contributions are welcome. Please open up an issue or create PR if you would like to help out.
+
+Run `yarn install --frozen-lockfile --ignore-scripts`, then `yarn test` with Node 18 or newer. Lint is non-fixing. Tests check the packed package with a strict TypeScript consumer and render/toggle/prop-update behavior with React Native host mocks. Native device rendering is not exercised.
+
+The checked-in type fixture uses TypeScript 5.9.3, React 16.14.0, `@types/react` 16.14.70 and `@types/react-native` 0.63.75. These are test versions, not a new peer compatibility restriction.
 
 Note: If editing the README, please conform to the [standard-readme](https://github.com/RichardLitt/standard-readme) specification.
 

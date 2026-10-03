@@ -12,8 +12,10 @@
     "bugs": "https://github.com/tiaanduplessis/react-native-modest-checkbox/issues",
     "author": "Tiaan du Plessis",
     "scripts": {
-        "lint": "standard --fix ./**/*.js",
-        "test": "npm run lint"
+        "lint": "standard",
+        "test": "npm run lint && npm run test:runtime && npm run test:types",
+        "test:runtime": "node test/runtime.js",
+        "test:types": "node test/packed.js"
     },
     "keywords": [
         "react-native",
@@ -22,17 +24,23 @@
         "react-native-modest-checkbox"
     ],
     "dependencies": {
-        "prop-types": "^15.7.2"
+        "prop-types": "^15.8.1"
     },
     "devDependencies": {
-        "babel-eslint": "10.0.1",
-        "standard": "12.0.1"
+        "@babel/core": "7.29.7",
+        "@babel/plugin-transform-modules-commonjs": "7.29.7",
+        "@babel/plugin-transform-react-jsx": "7.29.7",
+        "@types/react": "16.14.70",
+        "@types/react-native": "0.63.75",
+        "react": "16.14.0",
+        "react-test-renderer": "16.14.0",
+        "standard": "17.1.2",
+        "tar": "7.5.22",
+        "typescript": "5.9.3"
     },
     "peerDependencies": {
         "react": "*",
         "react-native": "*"
     },
-    "standard": {
-        "parser": "babel-eslint"
-    }
+    "types": "index.d.ts"
 }

@@ -71,27 +71,33 @@ class Checkbox extends PureComponent {
         disabled={disabled}
       >
         <View style={[styles.container, containerStyle]}>
-          {labelBefore ? (
-            <Label
-              labelStyle={labelStyle}
-              numberOfLabelLines={numberOfLabelLines}
-              label={label}
-              customLabel={customLabel}
-            />
-          ) : null}
+          {labelBefore
+            ? (
+              <Label
+                labelStyle={labelStyle}
+                numberOfLabelLines={numberOfLabelLines}
+                label={label}
+                customLabel={customLabel}
+              />
+              )
+            : null}
 
-          {checkedComponent && uncheckedComponent ? (
-            checked ? (
-              checkedComponent
-            ) : (
-              uncheckedComponent
-            )
-          ) : (
-            <Image
-              style={[styles.checkbox, checkboxStyle]}
-              source={checked ? checkedImage : uncheckedImage}
-            />
-          )}
+          {checkedComponent && uncheckedComponent
+            ? (
+                checked
+                  ? (
+                      checkedComponent
+                    )
+                  : (
+                      uncheckedComponent
+                    )
+              )
+            : (
+              <Image
+                style={[styles.checkbox, checkboxStyle]}
+                source={checked ? checkedImage : uncheckedImage}
+              />
+              )}
 
           {!labelBefore && (
             <Label
@@ -118,16 +124,18 @@ class Checkbox extends PureComponent {
 }
 
 const Label = ({ labelStyle, numberOfLabelLines, label, customLabel }) => {
-  return !customLabel ? (
-    <View style={styles.labelContainer}>
-      <Text style={[styles.label, labelStyle]} numberOfLines={numberOfLabelLines}>
-        {label}
-      </Text>
-    </View>
-  ) : customLabel
+  return !customLabel
+    ? (
+      <View style={styles.labelContainer}>
+        <Text style={[styles.label, labelStyle]} numberOfLines={numberOfLabelLines}>
+          {label}
+        </Text>
+      </View>
+      )
+    : customLabel
 }
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center'
