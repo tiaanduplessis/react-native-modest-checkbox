@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ImageSourcePropType, StyleSheet, Text } from 'react-native';
+import { ImageSourcePropType, ImageStyle, StyleSheet, Text, TextStyle, ViewStyle } from 'react-native';
 import Checkbox, { CheckboxProps, CheckboxChangeEvent, CheckboxCheckboxStyle, CheckboxContainerStyle, CheckboxLabelStyle } from 'react-native-modest-checkbox';
 
 const styles = StyleSheet.create({
@@ -39,6 +39,16 @@ const ref = React.createRef<Checkbox>();
 const full = <Checkbox {...props} ref={ref} />;
 const minimal = <Checkbox />;
 const nullComponents = <Checkbox customLabel={null} checkedComponent={null} uncheckedComponent={null} />;
+// StyleSheet results, registered numeric styles and false are valid directly, not just in arrays.
+const directStyles = <Checkbox checkboxStyle={styles.box} containerStyle={styles.container} labelStyle={styles.label} />;
+// The pinned React Native types represent legacy IDs with this numeric brand.
+const registeredStyles = <Checkbox
+    checkboxStyle={17 as number & { __registeredStyleBrand: ImageStyle }}
+    containerStyle={18 as number & { __registeredStyleBrand: ViewStyle }}
+    labelStyle={19 as number & { __registeredStyleBrand: TextStyle }}
+/>;
+const falsyStyles = <Checkbox checkboxStyle={false} containerStyle={false} labelStyle={false} />;
+const nullStyles = <Checkbox checkboxStyle={null} containerStyle={null} labelStyle={null} />;
 const images = <Checkbox checkedImage={[{ uri: 'https://example.com/checked.png' }]} />;
 const inferred = <Checkbox onChange={({ label, checked }) => {
     label.toUpperCase();
@@ -56,4 +66,12 @@ const badCallback = <Checkbox onChange={(checked: boolean) => {}} />;
 const badStyle = <Checkbox checkboxStyle={{ fontSize: 12 }} />;
 // @ts-expect-error customLabel must be an element, not text.
 const badLabel = <Checkbox customLabel="Choice" />;
-void [full, minimal, nullComponents, images, inferred, badChecked, badImage, badCallback, badStyle, badLabel];
+// @ts-expect-error Only false is a supported boolean style sentinel.
+const badBooleanStyle = <Checkbox checkboxStyle={true} />;
+// @ts-expect-error Nonempty strings are not styles.
+const badStringStyle = <Checkbox containerStyle="invalid" />;
+// @ts-expect-error The pinned React Native style contract does not include empty strings.
+const badEmptyStyle = <Checkbox labelStyle="" />;
+// @ts-expect-error This component accepts style values, not style callbacks.
+const badFunctionStyle = <Checkbox labelStyle={() => ({ color: 'blue' })} />;
+void [full, minimal, nullComponents, directStyles, registeredStyles, falsyStyles, nullStyles, images, inferred, badChecked, badImage, badCallback, badStyle, badLabel, badBooleanStyle, badStringStyle, badEmptyStyle, badFunctionStyle];
