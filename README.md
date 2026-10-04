@@ -132,6 +132,8 @@ export function Choice() {
 
 Style props use React Native's `StyleProp` types. Images accept React Native image sources, including registered assets returned by `require('./image.png')` and URI objects. The existing `CheckboxProps`, `CheckboxCheckboxStyle`, `CheckboxContainerStyle`, and `CheckboxLabelStyle` exports remain available.
 
+`checkboxStyle`, `containerStyle`, and `labelStyle` accept plain style objects, registered numeric style IDs from older React Native versions, arrays (including nested arrays), and the conditional values `false`, `null`, and `undefined`. These values are forwarded to the native components without changing them.
+
 ## Props
 
 <table style="width:80%">

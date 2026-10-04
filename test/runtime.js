@@ -3,6 +3,7 @@ const fs = require('fs')
 const path = require('path')
 const Module = require('module')
 const React = require('react')
+const PropTypes = require('prop-types')
 const renderer = require('react-test-renderer')
 const { transformSync } = require('@babel/core')
 
@@ -14,7 +15,19 @@ const code = transformSync(fs.readFileSync(filename, 'utf8'), {
   plugins: ['@babel/plugin-transform-react-jsx', '@babel/plugin-transform-modules-commonjs']
 }).code
 
-function loadCheckbox (platform) {
+function captureWarnings (run) {
+  const original = console.error
+  const warnings = []
+  console.error = (...args) => warnings.push(args.join(' '))
+  try {
+    run()
+  } finally {
+    console.error = original
+  }
+  return warnings
+}
+
+function loadCheckbox (platform, registeredStyles) {
   const component = new Module(filename, module)
   component.filename = filename
   component.paths = module.paths
@@ -26,7 +39,8 @@ function loadCheckbox (platform) {
     Text: 'Text',
     Image: 'Image',
     Platform: { OS: platform },
-    StyleSheet: { create: styles => styles }
+    // Older React Native versions returned numeric registered style IDs.
+    StyleSheet: { create: styles => registeredStyles ? Object.fromEntries(Object.keys(styles).map((key, index) => [key, index + 1])) : styles }
   }
   component.require = id => {
     if (id === 'react-native') return native
@@ -38,8 +52,26 @@ function loadCheckbox (platform) {
   return component.exports.default
 }
 
-for (const platform of ['ios', 'android']) {
-  const Checkbox = loadCheckbox(platform)
+for (const [platform, registeredStyles] of [['ios', false], ['android', false], ['ios', true], ['android', true]]) {
+  let Checkbox
+  assert.deepStrictEqual(captureWarnings(() => { Checkbox = loadCheckbox(platform, registeredStyles) }), [])
+  const styleProps = ['checkboxStyle', 'containerStyle', 'labelStyle']
+  const styleValues = [17, 0, false, null, undefined, { opacity: 0.5 }, [17, { opacity: 0.5 }, false, null, undefined, [{ opacity: 1 }]]]
+  const rejectedStyles = []
+  for (const name of styleProps) {
+    for (const value of styleValues) {
+      PropTypes.resetWarningCache()
+      const warnings = captureWarnings(() => PropTypes.checkPropTypes({ [name]: Checkbox.propTypes[name] }, { [name]: value }, 'prop', 'Checkbox'))
+      if (warnings.length) rejectedStyles.push({ name, value, warnings })
+    }
+    for (const value of [true, '', 'invalid', () => {}]) {
+      PropTypes.resetWarningCache()
+      const warnings = captureWarnings(() => PropTypes.checkPropTypes({ [name]: Checkbox.propTypes[name] }, { [name]: value }, 'prop', 'Checkbox'))
+      assert.strictEqual(warnings.length, 1, `Expected ${name} to reject ${String(value)}`)
+      assert(warnings[0].includes(`Invalid prop \`${name}\``))
+    }
+  }
+  assert.deepStrictEqual(rejectedStyles, [], 'Valid React Native styles must not warn')
   const touchable = platform === 'ios' ? 'TouchableOpacity' : 'TouchableNativeFeedback'
   const events = []
   let tree
@@ -64,6 +96,16 @@ for (const platform of ['ios', 'android']) {
   renderer.act(() => { tree.update(render({ checked: false, checkedImage, uncheckedImage, noFeedback: true, disabled: true })) })
   assert.strictEqual(tree.root.findByType('Image').props.source, uncheckedImage)
   assert.strictEqual(tree.root.findByType('TouchableWithoutFeedback').props.disabled, true)
+  for (const style of styleValues) {
+    const warnings = captureWarnings(() => renderer.act(() => {
+      tree.update(render({ checkboxStyle: style, containerStyle: style, labelStyle: style }))
+    }))
+    assert.deepStrictEqual(warnings, [])
+    assert.strictEqual(tree.root.findByType(touchable).props.style[1], style)
+    assert.strictEqual(tree.root.findAllByType('View')[0].props.style[1], style)
+    assert.strictEqual(tree.root.findByType('Image').props.style[1], style)
+    assert.strictEqual(tree.root.findByType('Text').props.style[1], style)
+  }
   const customLabel = React.createElement('CustomLabel')
   const checkedComponent = React.createElement('Checked')
   const uncheckedComponent = React.createElement('Unchecked')
@@ -78,4 +120,4 @@ for (const platform of ['ios', 'android']) {
   assert.strictEqual(tree.root.findByType('Text').props.numberOfLines, 3)
   renderer.act(() => { tree.unmount() })
 }
-console.log('Runtime regressions passed for iOS/Android host mocks; no native simulator is used')
+console.log('Runtime and style PropTypes regressions passed for iOS/Android host mocks with object/registered styles; no native simulator is used')
